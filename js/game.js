@@ -51,14 +51,9 @@ G.Game = (() => {
     checkOrientation();
   }
 
-  /** Móvil en vertical: aviso de girarlo (y pausa). */
+  /** Se juega en vertical y en horizontal: sólo marca el <body> para el CSS. */
   function checkOrientation() {
-    const portrait = G.Touch.active && innerHeight > innerWidth;
-    const el = document.getElementById('rotate');
-    if (!el) return;
-    if (portrait && !document.getElementById('rotate-ico').innerHTML) document.getElementById('rotate-ico').innerHTML = G.Icons.html('phone', 48);
-    el.classList.toggle('hidden', !portrait);
-    if (portrait) autoPause();
+    document.body.classList.toggle('portrait', innerHeight > innerWidth * 1.05);
   }
 
   /** Pausa sola (sólo en solitario: en grupo los demás siguen). */

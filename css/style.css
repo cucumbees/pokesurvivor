@@ -417,10 +417,25 @@ kbd {
 ::-webkit-scrollbar-track { background: transparent; }
 
 @media (max-width: 760px) and (min-height: 521px) {
-  #scr-menu { flex-direction: column; overflow-y: auto; }
+  #scr-menu { flex-direction: column; overflow-y: auto; justify-content: flex-start; }
   .menu-right { width: 100%; background: rgba(5,10,25,.7); }
-  .split { grid-template-columns: 1fr; }
+  .split { grid-template-columns: minmax(0, 1fr); }
   .logo .t1 { font-size: 34px; }
+  /* Móvil en vertical: la barra superior pasa a varias filas (no tapa el logo),
+     el Pokémon se ve más pequeño y los paneles no se aplastan entre sí. */
+  .topbar { left: 8px; right: 8px; top: 8px; flex-wrap: wrap; justify-content: flex-end; gap: 6px; }
+  .topbar .btn.small { padding: 4px 8px; }
+  .topbar .pill { padding: 4px 10px; font-size: 14px; }
+  #scr-menu .menu-left { flex: none; padding: 92px 16px 4px; }
+  #menu-partner { width: min(200px, 52vw); height: auto; aspect-ratio: 260 / 200; }
+  .menu-right { flex: none; overflow: visible; padding: 8px 16px 28px; gap: 10px; }
+  .menu-right > * { flex-shrink: 0; }
+  /* Pantallas que se abren con la barra superior visible: dejan sitio a sus dos filas. */
+  body:has(#topbar:not(.hidden)) .scr { padding-top: 96px; }
+  /* Mejoras y gacha: nada se sale por la derecha. */
+  .upg-head .grow { min-width: 0; }
+  #upg-mon { min-width: 0 !important; width: 100% !important; }
+  #pull-1, #pull-10, #pull-10b { flex: 1 1 100%; }
 }
 
 /* ============ iconos pixel art ============ */
